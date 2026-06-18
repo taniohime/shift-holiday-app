@@ -91,10 +91,14 @@ export default function EmployeeView({ user }) {
       setMessage('✅ 希望を送信しました');
       setSelectedType('V');
 
-      // 再取得
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      // 最新のデータを再取得
+      const q = query(
+        collection(db, 'holidays'),
+        where('userId', '==', user.uid)
+      );
+      const snapshot = await getDocs(q);
+      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setUserHolidays(data);
     } catch (err) {
       setMessage('❌ エラーが発生しました: ' + err.message);
     } finally {

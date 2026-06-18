@@ -74,7 +74,22 @@ export default function AdminPanel({ user }) {
       });
 
       setMessage(`✅ ${rank}位を承認しました`);
-      setTimeout(() => window.location.reload(), 1000);
+
+      // 最新のデータを再取得
+      const dateStr = selectedDate.toISOString().split('T')[0];
+      const q = query(
+        collection(db, 'holidays'),
+        where('date', '==', dateStr),
+        where('type', '==', selectedType),
+        orderBy('timestamp', 'asc')
+      );
+      const snapshot = await getDocs(q);
+      const data = snapshot.docs.map((doc, idx) => ({
+        id: doc.id,
+        rank: idx + 1,
+        ...doc.data(),
+      }));
+      setHolidayRequests(data);
     } catch (err) {
       setMessage('❌ エラー: ' + err.message);
     } finally {
@@ -91,7 +106,22 @@ export default function AdminPanel({ user }) {
       });
 
       setMessage(`❌ ${rank}位を拒否しました`);
-      setTimeout(() => window.location.reload(), 1000);
+
+      // 最新のデータを再取得
+      const dateStr = selectedDate.toISOString().split('T')[0];
+      const q = query(
+        collection(db, 'holidays'),
+        where('date', '==', dateStr),
+        where('type', '==', selectedType),
+        orderBy('timestamp', 'asc')
+      );
+      const snapshot = await getDocs(q);
+      const data = snapshot.docs.map((doc, idx) => ({
+        id: doc.id,
+        rank: idx + 1,
+        ...doc.data(),
+      }));
+      setHolidayRequests(data);
     } catch (err) {
       setMessage('❌ エラー: ' + err.message);
     } finally {
@@ -120,7 +150,22 @@ export default function AdminPanel({ user }) {
         });
       }
       setMessage(`✅ 最初の ${Math.min(limits[selectedType], holidayRequests.length)} 件を承認しました`);
-      setTimeout(() => window.location.reload(), 1000);
+
+      // 最新のデータを再取得
+      const dateStr = selectedDate.toISOString().split('T')[0];
+      const q = query(
+        collection(db, 'holidays'),
+        where('date', '==', dateStr),
+        where('type', '==', selectedType),
+        orderBy('timestamp', 'asc')
+      );
+      const snapshot = await getDocs(q);
+      const data = snapshot.docs.map((doc, idx) => ({
+        id: doc.id,
+        rank: idx + 1,
+        ...doc.data(),
+      }));
+      setHolidayRequests(data);
     } catch (err) {
       setMessage('❌ エラー: ' + err.message);
     } finally {
