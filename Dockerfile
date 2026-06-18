@@ -4,7 +4,7 @@ WORKDIR /app
 
 # 依存関係のインストール
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 # React アプリのビルド
 COPY . .

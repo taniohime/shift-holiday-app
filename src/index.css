@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  color: #1f2937;
+  background-color: #f9fafb;
+}
+
+input[type='date'],
+input[type='email'],
+input[type='password'],
+input[type='text'],
+select,
+textarea {
+  @apply px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 月選択ボタン */
+button[type='button'] {
+  @apply transition-colors;
+}
+
+/* ラジオボタンのカスタマイズ */
+input[type='radio'] {
+  @apply cursor-pointer;
+}
+
+/* ドイツ語フォント設定 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
